@@ -67,23 +67,38 @@ function toggleMusic() {
 // ========================================
 function startPetals() {
     const petalColors = ['#f8b4c8','#f4a0b8','#e8829a','#f9c8d4','#fde8ee','#f06090','#ffadc5'];
-    const petalShapes = [
-        'M10,2 C14,2 18,6 18,10 C18,16 10,22 10,22 C10,22 2,16 2,10 C2,6 6,2 10,2Z'
-    ];
 
     setInterval(() => {
         const petal = document.createElement('div');
         petal.className = 'rose-petal';
 
-        petal.innerHTML = `<svg width="20" height="20"><circle cx="10" cy="10" r="8" fill="${petalColors[Math.floor(Math.random()*petalColors.length)]}"/></svg>`;
+        const size = 10 + Math.random() * 16;
+        const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+
+        // RANDOM VALUES (IMPORTANT)
+        const sway = 60 + Math.random() * 80;
+        const rotStart = Math.random() * 360;
+        const rotEnd = rotStart + (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 360);
+
+        petal.innerHTML = `
+            <svg width="${size}" height="${size}" viewBox="0 0 20 22">
+                <path d="M10,2 C14,2 18,6 18,10 C18,16 10,22 10,22 C10,22 2,16 2,10 C2,6 6,2 10,2Z"
+                fill="${color}" opacity="0.85"/>
+            </svg>
+        `;
 
         petal.style.cssText = `
-            position:fixed; left:${Math.random()*100}vw; top:-30px;
-            animation:petalFall 10s linear forwards;`;
+            left:${Math.random() * 100}vw;
+            animation:petalFall ${6 + Math.random() * 6}s linear forwards;
+            --sway:${sway}px;
+            --rotate-start:${rotStart}deg;
+            --rotate-end:${rotEnd}deg;
+        `;
 
         document.body.appendChild(petal);
+
         setTimeout(() => petal.remove(), 10000);
-    }, 500);
+    }, 350);
 }
 
 // ========================================
