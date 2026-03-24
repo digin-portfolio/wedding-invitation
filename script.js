@@ -160,7 +160,7 @@ ${attend.value === 'yes' ? '✅ Attending' : '❌ Not Attending'}
 👥 Guests: ${guests}
 📝 Note: ${note || 'None'}`;
 
-            fetch("https://YOUR-VERCEL-URL.vercel.app/api/send", {
+            fetch("https://wedding-invitation-mu-flame.vercel.app/", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
