@@ -27,6 +27,36 @@ function openEnvelope() {
     }
 }
 
+// 👇 ADD HERE
+function loadWishes() {
+    const list = document.getElementById("congrats-list");
+    if (!list) return;
+
+    const wishes = JSON.parse(localStorage.getItem("wedding_wishes") || "[]");
+
+    if (wishes.length === 0) {
+        list.innerHTML = `
+            <div class="no-congrats-message">
+                No wishes yet. Be the first to wish Dyna & Sanosh! 🎉
+            </div>`;
+        return;
+    }
+
+    list.innerHTML = wishes.map(w => `
+        <div class="congrats-item">
+            <div class="congrats-avatar">
+                ${w.name.charAt(0).toUpperCase()}
+            </div>
+
+            <div class="congrats-text">
+                <p class="congrats-name">
+                    ${w.name}
+                </p>
+                <p class="congrats-message">${w.message}</p>
+            </div>
+        </div>
+    `).join("");
+}
 // ========================================
 // MUSIC PLAYER
 // ========================================
