@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -21,24 +21,120 @@
     </button>
 </div>
 
-<!-- ENVELOPE OVERLAY -->
+<!-- ============================================================
+     ENVELOPE OVERLAY — Navy Blue + Gold Wax Seal + Floral Corners
+     ============================================================ -->
 <div id="envelope-overlay" class="envelope-overlay">
+
+    <!-- Watercolor floral corners -->
+    <svg class="floral-corner tl" width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 200 Q40 160 30 120 Q50 140 45 170" stroke="#7a9bb5" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M30 120 Q60 100 80 80" stroke="#7a9bb5" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M60 150 Q90 120 100 90" stroke="#6a8fa8" stroke-width="1" fill="none" opacity="0.45"/>
+        <path d="M15 190 Q50 170 70 140 Q90 110 110 70" stroke="#8aafc8" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="48" cy="165" rx="14" ry="7" fill="#8fb4ce" opacity="0.35" transform="rotate(-30 48 165)"/>
+        <ellipse cx="75" cy="128" rx="12" ry="6" fill="#7aa3be" opacity="0.3" transform="rotate(-55 75 128)"/>
+        <ellipse cx="95" cy="105" rx="11" ry="5" fill="#8fb4ce" opacity="0.28" transform="rotate(-70 95 105)"/>
+        <ellipse cx="35" cy="145" rx="10" ry="5" fill="#6a8fa8" opacity="0.3" transform="rotate(-20 35 145)"/>
+        <ellipse cx="115" cy="75" rx="10" ry="4.5" fill="#7aa3be" opacity="0.25" transform="rotate(-80 115 75)"/>
+        <ellipse cx="68" cy="110" rx="9" ry="4" fill="#8fb4ce" opacity="0.28" transform="rotate(-45 68 110)"/>
+        <path d="M80 80 Q95 60 105 40" stroke="#6a8fa8" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <path d="M80 80 Q100 75 115 65" stroke="#7a9bb5" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <ellipse cx="107" cy="42" rx="8" ry="4" fill="#8fb4ce" opacity="0.22" transform="rotate(-80 107 42)"/>
+        <ellipse cx="117" cy="63" rx="8" ry="3.5" fill="#7aa3be" opacity="0.22" transform="rotate(-30 117 63)"/>
+        <circle cx="55" cy="90" r="12" fill="#3d6b9e" opacity="0.28"/>
+        <circle cx="55" cy="90" r="8"  fill="#4a7db5" opacity="0.32"/>
+        <circle cx="55" cy="90" r="4"  fill="#5a93cc" opacity="0.35"/>
+        <path d="M47 86 Q55 76 63 86" stroke="#3d6b9e" stroke-width="1" fill="none" opacity="0.4"/>
+        <circle cx="90" cy="55" r="9"  fill="#3a6899" opacity="0.22"/>
+        <circle cx="90" cy="55" r="5"  fill="#4a7db5" opacity="0.26"/>
+        <ellipse cx="18" cy="195" rx="10" ry="15" fill="#2d5a8c" opacity="0.28" transform="rotate(15 18 195)"/>
+        <ellipse cx="30" cy="197" rx="10" ry="14" fill="#3a6898" opacity="0.26" transform="rotate(-10 30 197)"/>
+        <circle cx="24" cy="194" r="5" fill="#1a3d6e" opacity="0.3"/>
+        <circle cx="110" cy="50" r="4" fill="#4a7db5" opacity="0.2"/>
+        <circle cx="125" cy="45" r="3" fill="#5a93cc" opacity="0.18"/>
+        <circle cx="75" cy="65" r="3.5" fill="#3d6b9e" opacity="0.2"/>
+    </svg>
+
+    <svg class="floral-corner tr" width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 200 Q40 160 30 120 Q50 140 45 170" stroke="#7a9bb5" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M30 120 Q60 100 80 80" stroke="#7a9bb5" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M60 150 Q90 120 100 90" stroke="#6a8fa8" stroke-width="1" fill="none" opacity="0.45"/>
+        <path d="M15 190 Q50 170 70 140 Q90 110 110 70" stroke="#8aafc8" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="48" cy="165" rx="14" ry="7" fill="#8fb4ce" opacity="0.35" transform="rotate(-30 48 165)"/>
+        <ellipse cx="75" cy="128" rx="12" ry="6" fill="#7aa3be" opacity="0.3" transform="rotate(-55 75 128)"/>
+        <ellipse cx="95" cy="105" rx="11" ry="5" fill="#8fb4ce" opacity="0.28" transform="rotate(-70 95 105)"/>
+        <ellipse cx="35" cy="145" rx="10" ry="5" fill="#6a8fa8" opacity="0.3" transform="rotate(-20 35 145)"/>
+        <ellipse cx="115" cy="75" rx="10" ry="4.5" fill="#7aa3be" opacity="0.25" transform="rotate(-80 115 75)"/>
+        <ellipse cx="68" cy="110" rx="9" ry="4" fill="#8fb4ce" opacity="0.28" transform="rotate(-45 68 110)"/>
+        <path d="M80 80 Q95 60 105 40" stroke="#6a8fa8" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <path d="M80 80 Q100 75 115 65" stroke="#7a9bb5" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <ellipse cx="107" cy="42" rx="8" ry="4" fill="#8fb4ce" opacity="0.22" transform="rotate(-80 107 42)"/>
+        <ellipse cx="117" cy="63" rx="8" ry="3.5" fill="#7aa3be" opacity="0.22" transform="rotate(-30 117 63)"/>
+        <circle cx="55" cy="90" r="12" fill="#3d6b9e" opacity="0.28"/>
+        <circle cx="55" cy="90" r="8"  fill="#4a7db5" opacity="0.32"/>
+        <circle cx="55" cy="90" r="4"  fill="#5a93cc" opacity="0.35"/>
+        <path d="M47 86 Q55 76 63 86" stroke="#3d6b9e" stroke-width="1" fill="none" opacity="0.4"/>
+        <circle cx="90" cy="55" r="9"  fill="#3a6899" opacity="0.22"/>
+        <circle cx="90" cy="55" r="5"  fill="#4a7db5" opacity="0.26"/>
+        <ellipse cx="18" cy="195" rx="10" ry="15" fill="#2d5a8c" opacity="0.28" transform="rotate(15 18 195)"/>
+        <ellipse cx="30" cy="197" rx="10" ry="14" fill="#3a6898" opacity="0.26" transform="rotate(-10 30 197)"/>
+        <circle cx="24" cy="194" r="5" fill="#1a3d6e" opacity="0.3"/>
+        <circle cx="110" cy="50" r="4" fill="#4a7db5" opacity="0.2"/>
+        <circle cx="125" cy="45" r="3" fill="#5a93cc" opacity="0.18"/>
+        <circle cx="75" cy="65" r="3.5" fill="#3d6b9e" opacity="0.2"/>
+    </svg>
+
+    <svg class="floral-corner bl" width="180" height="180" viewBox="0 0 180 180" fill="none">
+        <path d="M15 30 Q40 60 60 100 Q80 130 100 160" stroke="#7a9bb5" stroke-width="1" fill="none" opacity="0.45"/>
+        <path d="M60 100 Q80 80 110 70" stroke="#6a8fa8" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="65" cy="95" rx="12" ry="5.5" fill="#8fb4ce" opacity="0.3" transform="rotate(40 65 95)"/>
+        <ellipse cx="88" cy="75" rx="10" ry="4.5" fill="#7aa3be" opacity="0.28" transform="rotate(20 88 75)"/>
+        <ellipse cx="105" cy="68" rx="9" ry="4" fill="#8fb4ce" opacity="0.25" transform="rotate(10 105 68)"/>
+        <circle cx="115" cy="58" r="8" fill="#3d6b9e" opacity="0.22"/>
+        <circle cx="115" cy="58" r="4" fill="#4a7db5" opacity="0.25"/>
+        <path d="M100 160 Q120 150 140 130" stroke="#7a9bb5" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="132" cy="136" rx="11" ry="5" fill="#8fb4ce" opacity="0.28" transform="rotate(-25 132 136)"/>
+        <ellipse cx="160" cy="158" rx="12" ry="16" fill="#2d5a8c" opacity="0.25" transform="rotate(20 160 158)"/>
+        <ellipse cx="148" cy="162" rx="11" ry="14" fill="#3a6898" opacity="0.22" transform="rotate(-5 148 162)"/>
+        <circle cx="154" cy="158" r="5" fill="#1a3d6e" opacity="0.28"/>
+    </svg>
+
+    <svg class="floral-corner br" width="180" height="180" viewBox="0 0 180 180" fill="none">
+        <path d="M15 30 Q40 60 60 100 Q80 130 100 160" stroke="#7a9bb5" stroke-width="1" fill="none" opacity="0.45"/>
+        <path d="M60 100 Q80 80 110 70" stroke="#6a8fa8" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="65" cy="95" rx="12" ry="5.5" fill="#8fb4ce" opacity="0.3" transform="rotate(40 65 95)"/>
+        <ellipse cx="88" cy="75" rx="10" ry="4.5" fill="#7aa3be" opacity="0.28" transform="rotate(20 88 75)"/>
+        <ellipse cx="105" cy="68" rx="9" ry="4" fill="#8fb4ce" opacity="0.25" transform="rotate(10 105 68)"/>
+        <circle cx="115" cy="58" r="8" fill="#3d6b9e" opacity="0.22"/>
+        <circle cx="115" cy="58" r="4" fill="#4a7db5" opacity="0.25"/>
+        <path d="M100 160 Q120 150 140 130" stroke="#7a9bb5" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <ellipse cx="132" cy="136" rx="11" ry="5" fill="#8fb4ce" opacity="0.28" transform="rotate(-25 132 136)"/>
+        <ellipse cx="160" cy="158" rx="12" ry="16" fill="#2d5a8c" opacity="0.25" transform="rotate(20 160 158)"/>
+        <ellipse cx="148" cy="162" rx="11" ry="14" fill="#3a6898" opacity="0.22" transform="rotate(-5 148 162)"/>
+        <circle cx="154" cy="158" r="5" fill="#1a3d6e" opacity="0.28"/>
+    </svg>
+
+    <!-- Clickable envelope area -->
     <div id="envelope-click-area" class="envelope-click-area" onclick="openEnvelope()">
-        <div class="envelope">
-            <div class="envelope-back"></div>
-            <div class="envelope-left"></div>
-            <div class="envelope-right"></div>
-            <div class="envelope-bottom"></div>
-            <div class="envelope-flap"></div>
+        <div class="envelope" id="envelope-main">
+            <div class="env-body"></div>
+            <div class="env-left"></div>
+            <div class="env-right"></div>
+            <div class="env-bottom"></div>
+            <div class="env-flap"></div>
+            <div class="env-shimmer"></div>
+
+            <!-- Gold wax seal with D&S monogram -->
             <div class="wax-seal">
-                <svg viewBox="0 0 24 24" class="stamp-icon" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 21Q11 16 12 11"/><path d="M12 18Q8 15 7 13Q8 12 10 14"/>
-                    <path d="M12 19Q15 16 16 13Q15 12 13 14"/><path d="M9.5 11C8 7 10 4 12 4C14 4 16 7 14.5 11"/>
-                    <path d="M12 11C11.5 8 11.5 6 12 4"/><path d="M10 4C10.5 5 11 6 12 6C13 6 13.5 5 14 4"/>
-                </svg>
+                <div class="wax-seal-shape"></div>
+                <div class="wax-seal-inner">
+                    <span class="wax-seal-monogram">D&S</span>
+                </div>
             </div>
-            <div class="envelope-text">TAP TO OPEN</div>
         </div>
+
+        <p class="envelope-tap-label">Tap to open</p>
     </div>
 </div>
 
@@ -167,7 +263,6 @@
                 </svg> From 11:30 AM to 08:00 PM
             </p>
 
-            <!-- STYLED MAP -->
             <div class="map-container">
                 <div class="map-styled-header">
                     <span class="map-pin-icon">📍</span>
