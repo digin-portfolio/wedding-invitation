@@ -1,282 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Wedding - Dyna & Sanosh</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for elegant typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- Envelope Overlay -->
-    <div id="envelope-overlay" class="envelope-overlay">
-        <div id="envelope-click-area" class="envelope-click-area" onclick="openEnvelope()">
-            <div class="envelope">
-                <div class="envelope-back"></div>
-                <div class="envelope-left"></div>
-                <div class="envelope-right"></div>
-                <div class="envelope-bottom"></div>
-                <div class="envelope-flap"></div>
-                <div class="wax-seal">
-                    <svg viewBox="0 0 24 24" class="stamp-icon" fill="none" stroke="currentColor" stroke-width="1"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 21Q11 16 12 11" />
-                        <path d="M12 18Q8 15 7 13Q8 12 10 14" />
-                        <path d="M12 19Q15 16 16 13Q15 12 13 14" />
-                        <path d="M9.5 11C8 7 10 4 12 4C14 4 16 7 14.5 11" />
-                        <path d="M12 11C11.5 8 11.5 6 12 4" />
-                        <path d="M10 4C10.5 5 11 6 12 6C13 6 13.5 5 14 4" />
-                    </svg>
-                </div>
-                <div class="envelope-text">TAP TO OPEN</div>
+<!-- 🎵 FLOATING MUSIC PLAYER -->
+<div id="music-player" class="music-player">
+    <button id="music-toggle-btn" class="music-toggle-btn" onclick="toggleMusic()">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+        <span class="music-label">Music</span>
+    </button>
+</div>
+
+<!-- ENVELOPE OVERLAY -->
+<div id="envelope-overlay" class="envelope-overlay">
+    <div id="envelope-click-area" class="envelope-click-area" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
+            <div class="envelope-bottom"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">
+                <svg viewBox="0 0 24 24" class="stamp-icon" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21Q11 16 12 11"/><path d="M12 18Q8 15 7 13Q8 12 10 14"/>
+                    <path d="M12 19Q15 16 16 13Q15 12 13 14"/><path d="M9.5 11C8 7 10 4 12 4C14 4 16 7 14.5 11"/>
+                    <path d="M12 11C11.5 8 11.5 6 12 4"/><path d="M10 4C10.5 5 11 6 12 6C13 6 13.5 5 14 4"/>
+                </svg>
             </div>
+            <div class="envelope-text">TAP TO OPEN</div>
         </div>
     </div>
+</div>
 
-    <!-- Audio Element -->
-    <audio id="bg-music" loop autoplay>
-        <source src="A_Thousand_Years.mp3" type="audio/mpeg">
-    </audio>
+<!-- AUDIO -->
+<audio id="bg-music" loop>
+    <source src="A_Thousand_Years.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Main Content (Hidden initially) -->
-    <main id="main-content" class="hidden">
+<!-- MAIN CONTENT -->
+<main id="main-content" class="hidden">
 
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <p class="pre-title">WE ARE GETTING MARRIED</p>
-                <h1 class="names">Dyna<br><span class="ampersand">&</span><br>Sanosh</h1>
-                <p class="date" style="margin-top: 20px; margin-bottom: 60px;">APRIL 05, 2026</p>
-            </div>
-        </section>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <p class="pre-title">WE ARE GETTING MARRIED</p>
+            <h1 class="names">Dyna<br><span class="ampersand">&</span><br>Sanosh</h1>
+            <p class="date" style="margin-top:20px;margin-bottom:60px;">APRIL 05, 2026</p>
+        </div>
+    </section>
 
-        <!-- Countdown Section -->
-        <section id="countdown-section" class="countdown-section">
-            <h2 class="section-title text-white">Countdown</h2>
-            <p class="section-subtitle text-white">To the most special day of our lives</p>
-            <div class="countdown-container">
-                <div class="time-box">
-                    <span id="days" class="number">00</span>
-                    <span class="label">DAYS</span>
+    <!-- COUNTDOWN -->
+    <section id="countdown-section" class="countdown-section">
+        <h2 class="section-title text-white">Countdown</h2>
+        <p class="section-subtitle text-white">To the most special day of our lives</p>
+        <div class="countdown-container">
+            <div class="time-box"><span id="days" class="number">00</span><span class="label">DAYS</span></div>
+            <div class="time-box"><span id="hours" class="number">00</span><span class="label">HOURS</span></div>
+            <div class="time-box"><span id="minutes" class="number">00</span><span class="label">MINUTES</span></div>
+            <div class="time-box"><span id="seconds" class="number">00</span><span class="label">SECONDS</span></div>
+        </div>
+    </section>
+
+    <!-- WISHES WALL -->
+    <section id="congrats-section" class="congrats-section">
+        <h2 class="section-title">Wishes Wall</h2>
+        <p class="section-subtitle">Messages from loved ones — saved forever 💕</p>
+        <div class="congrats-list" id="congrats-list">
+            <div class="no-congrats-message"><p>No wishes yet. Be the first to wish Dyna & Sanosh! 🎉</p></div>
+        </div>
+        <button class="add-congrats-btn" onclick="addCongrats()">✨ Leave a Wish</button>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline-section" class="timeline-section">
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time-badge">11:30</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <div class="timeline-content"><h3>Guest Arrival</h3><p>Reception and welcome</p></div>
                 </div>
-                <div class="time-box">
-                    <span id="hours" class="number">00</span>
-                    <span class="label">HOURS</span>
+                <div class="timeline-item">
+                    <div class="time-badge">12:00</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 22h2M12 15v7M8 5a4 4 0 0 0 8 0V3H8z"></path></svg>
+                    </div>
+                    <div class="timeline-content"><h3>Welcome Drink</h3><p>Welcome cocktail</p></div>
                 </div>
-                <div class="time-box">
-                    <span id="minutes" class="number">00</span>
-                    <span class="label">MINUTES</span>
+                <div class="timeline-item">
+                    <div class="time-badge">12:30</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13M10 21v-5a2 2 0 0 1 4 0v5"></path></svg>
+                    </div>
+                    <div class="timeline-content"><h3>Ceremony</h3><p>The most special moment</p></div>
                 </div>
-                <div class="time-box">
-                    <span id="seconds" class="number">00</span>
-                    <span class="label">SECONDS</span>
+                <div class="timeline-item">
+                    <div class="time-badge">13:30</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 22h2M12 15v7M8 5a4 4 0 0 0 8 0V3H8z"></path></svg>
+                    </div>
+                    <div class="timeline-content"><h3>Cocktail</h3><p>Appetizers in the gardens</p></div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Congratulations Section -->
-        <section id="congrats-section" class="congrats-section">
-            <h2 class="section-title">Congratulations</h2>
-            <p class="section-subtitle">Messages from loved ones</p>
-            <div class="congrats-list" id="congrats-list">
-                <div class="no-congrats-message">
-                    <p>No congratulations yet. Be the first to congratulate! 🎉</p>
+                <div class="timeline-item">
+                    <div class="time-badge">15:00</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 10l-2-6M17 10l2-6M17 10v12M7 10l2-6M7 10l-2-6M7 10v12"></path></svg>
+                    </div>
+                    <div class="timeline-content"><h3>Banquet</h3><p>Lunch and celebration</p></div>
                 </div>
-            </div>
-            <button class="add-congrats-btn" onclick="addCongrats()">+ Add Your Congratulations</button>
-        </section>
-
-        <!-- Timeline Section -->
-        <section id="timeline-section" class="timeline-section">
-            <div class="timeline-container">
-                <div class="timeline">
-                    <!-- Item 1 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">11:30</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Guest Arrival</h3>
-                            <p>Reception and welcome at the hotel</p>
-                        </div>
+                <div class="timeline-item">
+                    <div class="time-badge">17:00</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13M9 9l12-2M5 21h4M3 21v-3a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v3"></path></svg>
                     </div>
-                    <!-- Item 2 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">12:00</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 22h2M12 15v7M8 5a4 4 0 0 0 8 0V3H8z"></path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Welcome Drink</h3>
-                            <p>Welcome cocktail while we wait</p>
-                        </div>
+                    <div class="timeline-content"><h3>Party</h3><p>Dance and celebrate!</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-badge">20:00</div>
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4l3 3"></path></svg>
                     </div>
-                    <!-- Item 3 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">12:30</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 21h18M5 21V8l7-5 7 5v13M10 21v-5a2 2 0 0 1 4 0v5"></path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Ceremony</h3>
-                            <p>The most special moment of the day</p>
-                        </div>
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">13:30</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 22h2M12 15v7M8 5a4 4 0 0 0 8 0V3H8z"></path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Cocktail</h3>
-                            <p>Appetizers and drinks in the gardens</p>
-                        </div>
-                    </div>
-                    <!-- Item 5 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">15:00</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 10l-2 -6M17 10l2 -6M17 10v12M7 10l2 -6M7 10l-2 -6M7 10v12"></path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Banquet</h3>
-                            <p>Lunch and celebration</p>
-                        </div>
-                    </div>
-                    <!-- Item 6 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">17:00</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 18V5l12-2v13M9 9l12-2M5 21h4M3 21v-3a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v3">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Party</h3>
-                            <p>Dance and celebrate!</p>
-                        </div>
-                    </div>
-                    <!-- Item 7 -->
-                    <div class="timeline-item">
-                        <div class="time-badge">20:00</div>
-                        <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4l3 3"></path>
-                            </svg>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Farewell</h3>
-                            <p>Goodbye and good memories</p>
-                        </div>
-                    </div>
+                    <div class="timeline-content"><h3>Farewell</h3><p>Goodbye and good memories</p></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Details Section -->
-        <section id="details-section" class="details-section">
-            <div class="details-header">
-                <div class="glasses-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M8 22h8M12 15v7M8 5a4 4 0 0 0 8 0v-2h-8v2zM15 5a3 3 0 0 0-6 0M9 9h6"></path>
+    <!-- DETAILS / MAP -->
+    <section id="details-section" class="details-section">
+        <div class="details-header">
+            <div class="glasses-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M8 22h8M12 15v7M8 5a4 4 0 0 0 8 0v-2h-8v2zM15 5a3 3 0 0 0-6 0M9 9h6"></path>
+                </svg>
+            </div>
+            <h2 class="section-title">Details of the Day</h2>
+            <p class="section-subtitle">Everything you need to know</p>
+        </div>
+
+        <div class="location-card" style="text-align:center;">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+            </div>
+            <h3>LOCATION</h3>
+            <h4 class="venue-name">Seven Seas Hotel Dubai Airport</h4>
+            <p class="venue-time">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px;">
+                    <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+                </svg> From 11:30 AM to 08:00 PM
+            </p>
+
+            <!-- STYLED MAP -->
+            <div class="map-container">
+                <div class="map-styled-header">
+                    <span class="map-pin-icon">📍</span>
+                    <div>
+                        <strong>Seven Seas Hotel</strong><br>
+                        <small>Dubai Airport Area, Dubai, UAE</small>
+                    </div>
+                    <a href="https://maps.google.com/?q=Seven+Seas+Hotel+Dubai+Airport" target="_blank" class="map-directions-link">Get Directions →</a>
+                </div>
+                <div class="map-embed" style="height:320px;overflow:hidden;position:relative;border-radius:0 0 10px 10px;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.5!2d55.3580!3d25.2540!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d8f4f4f4f4f%3A0x1234567890abcdef!2sSeven%20Seas%20Hotel%20Dubai%20Airport!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
+                        width="100%" height="100%" style="border:0;filter:sepia(20%) saturate(1.2) hue-rotate(10deg);"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <a href="https://maps.google.com/?q=Seven+Seas+Hotel+Dubai+Airport" target="_blank" class="action-btn" style="text-decoration:none;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
                     </svg>
-                </div>
-                <h2 class="section-title">Details of the day</h2>
-                <p class="section-subtitle">Everything you need to know</p>
-            </div>
-
-            <div class="location-card" style="text-align: center;">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
+                    Open in Maps
+                </a>
+                <button class="action-btn" onclick="addToCalendar()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                </div>
-                <h3>LOCATION</h3>
-                <h4 class="venue-name">Seven Seas Hotel Dubai Airport</h4>
-                <p class="venue-time"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                        stroke-width="2" style="vertical-align: middle; margin-right: 5px;">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg> From 11:30 AM to 08:00 PM</p>
+                    Add to Calendar
+                </button>
+            </div>
+        </div>
+    </section>
 
-                <div class="map-container">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1920"
-                        alt="Venue Image" class="venue-img">
-                    <div class="map-embed" style="height: 300px; overflow: hidden; position: relative;">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.8!2d55.3644!3d25.2532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5e5c0000000f%3A0x7777777777777777!2sSeven%20Seas%20Hotel%20Dubai%20Airport!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        <!-- Red Pin Marker -->
-                        <svg class="map-pin-marker" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%); z-index: 10; color: #e74c3c; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3" fill="#e74c3c"></circle>
-                        </svg>
+    <!-- 💌 RSVP SECTION -->
+    <section id="rsvp-section" class="rsvp-section">
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-subtitle">Please let us know by March 25, 2026</p>
+
+        <div class="rsvp-card">
+            <div class="rsvp-icon">💌</div>
+            <h3 class="rsvp-subtitle">Will you be joining us?</h3>
+
+            <form id="rsvp-form" class="rsvp-form">
+                <div class="form-group">
+                    <label for="rsvp-name">Your Full Name *</label>
+                    <input type="text" id="rsvp-name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Will you attend? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attend" value="yes">
+                            <span class="radio-custom"></span>
+                            <span>🎉 Joyfully Accepts</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="attend" value="no">
+                            <span class="radio-custom"></span>
+                            <span>😢 Regretfully Declines</span>
+                        </label>
                     </div>
                 </div>
 
-                <div class="card-actions">
-                    <a href="https://maps.google.com/?q=Seven+Seas+Hotel+Dubai+Airport" target="_blank" class="action-btn"
-                        style="text-decoration: none;">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                            stroke-width="2" style="margin-right: 8px;">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        Open in Maps
-                    </a>
-                    <button class="action-btn" onclick="addToCalendar()">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                            stroke-width="2" style="margin-right: 8px;">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        Add to calendar
-                    </button>
+                <div class="form-group">
+                    <label for="rsvp-guests">Number of Guests</label>
+                    <select id="rsvp-guests">
+                        <option value="1">Just me</option>
+                        <option value="2">2 guests</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                        <option value="5+">5+ guests</option>
+                    </select>
                 </div>
-            </div>
-        </section>
 
-        <!-- Thank You Section -->
-        <section id="thank-you-section" class="thank-you-section">
-            <div class="thank-you-content">
-                <h2 class="thank-you-title">Thank You</h2>
-                <p class="thank-you-text">We can't wait to celebrate our special day with you!</p>
-                <div class="divider" style="margin-top: 30px;">
-                    <span class="diamond"></span>
+                <div class="form-group">
+                    <label for="rsvp-note">Special Note (optional)</label>
+                    <textarea id="rsvp-note" placeholder="Dietary needs, message for the couple..." rows="3"></textarea>
                 </div>
-            </div>
-        </section>
 
-    </main>
+                <button type="submit" class="rsvp-submit-btn">Send RSVP 💍</button>
+            </form>
 
-    <script src="script.js"></script>
+            <div id="rsvp-success" class="rsvp-success"></div>
+        </div>
+    </section>
+
+    <!-- THANK YOU -->
+    <section id="thank-you-section" class="thank-you-section">
+        <div class="thank-you-content">
+            <h2 class="thank-you-title">Thank You</h2>
+            <p class="thank-you-text">We can't wait to celebrate our special day with you!</p>
+            <div class="divider" style="margin-top:30px;"><span class="diamond"></span></div>
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
 </body>
-
 </html>
