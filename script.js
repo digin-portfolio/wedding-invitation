@@ -1,331 +1,310 @@
-// Global function to open envelope
+// ========================================
+// GLOBAL: OPEN ENVELOPE
+// ========================================
 function openEnvelope() {
-    console.log('=== ENVELOPE OPENING STARTED ===');
-    
     const envelopeOverlay = document.getElementById('envelope-overlay');
-    console.log('1. envelopeOverlay found:', !!envelopeOverlay);
-    
     const envelope = document.querySelector('.envelope');
-    console.log('2. envelope found:', !!envelope);
-    
     const mainContent = document.getElementById('main-content');
-    console.log('3. mainContent found:', !!mainContent);
-    
     const heroContent = document.querySelector('.hero-content');
-    console.log('4. heroContent found:', !!heroContent);
 
-    if (!envelope) {
-        console.error('ERROR: Envelope not found!');
-        return;
-    }
-    
-    if (!envelopeOverlay) {
-        console.error('ERROR: Envelope overlay not found!');
-        return;
-    }
-    
-    if (!mainContent) {
-        console.error('ERROR: Main content not found!');
-        return;
-    }
+    if (!envelope || !envelopeOverlay || !mainContent) return;
 
-    console.log('5. Adding open-anim class to envelope');
     envelope.classList.add('open-anim');
-    console.log('6. Class added. Current classes:', envelope.className);
-    
-    console.log('7. Adding open class to overlay');
     envelopeOverlay.classList.add('open');
-    console.log('8. Overlay class added');
-    
-    console.log('9. Removing hidden from mainContent');
     mainContent.classList.remove('hidden');
-    console.log('10. Main content shown');
-    
-    // Animate the hero content
+
     if (heroContent) {
         setTimeout(() => {
             heroContent.style.opacity = '1';
             heroContent.style.transition = 'opacity 1.5s ease-in-out';
         }, 300);
     }
-    
-    // Play background music
+
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic) {
         bgMusic.play().catch(err => console.log('Music play error:', err));
-    }
-    
-    console.log('=== ENVELOPE OPENING COMPLETE ===');
-}
-
-function createSparklesGlobal() {
-    const sparkleEmojis = ['✨', '⭐', '💫', '🌟'];
-    const waxSeal = document.querySelector('.wax-seal');
-    
-    if (!waxSeal) return;
-    
-    const sealRect = waxSeal.getBoundingClientRect();
-    const sealCenterX = sealRect.left + sealRect.width / 2;
-    const sealCenterY = sealRect.top + sealRect.height / 2;
-    
-    for (let i = 0; i < 12; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle-particle';
-        sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
-        
-        const angle = (i / 12) * Math.PI * 2;
-        const distance = 80 + Math.random() * 40;
-        const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance;
-        
-        sparkle.style.left = sealCenterX + 'px';
-        sparkle.style.top = sealCenterY + 'px';
-        sparkle.style.setProperty('--tx', tx + 'px');
-        sparkle.style.setProperty('--ty', ty + 'px');
-        sparkle.style.fontSize = (0.8 + Math.random() * 0.5) + 'rem';
-        
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 800);
+        updateMusicBtn(true);
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const envelopeOverlay = document.getElementById('envelope-overlay');
-    const envelopeClickArea = document.getElementById('envelope-click-area');
-    const envelope = document.querySelector('.envelope');
+// ========================================
+// MUSIC PLAYER
+// ========================================
+function updateMusicBtn(isPlaying) {
+    const btn = document.getElementById('music-toggle-btn');
+    if (!btn) return;
+    if (isPlaying) {
+        btn.classList.add('playing');
+        btn.innerHTML = `
+            <div class="music-bars">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <span class="music-label">Playing</span>`;
+    } else {
+        btn.classList.remove('playing');
+        btn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <span class="music-label">Music</span>`;
+    }
+}
+
+function toggleMusic() {
     const bgMusic = document.getElementById('bg-music');
-    const mainContent = document.getElementById('main-content');
-    const heroContent = document.querySelector('.hero-content');
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+        bgMusic.play();
+        updateMusicBtn(true);
+    } else {
+        bgMusic.pause();
+        updateMusicBtn(false);
+    }
+}
 
-    // ===== COUNTDOWN LOGIC =====
-    // Wedding: April 05, 2026 at 11:30 AM
+// ========================================
+// ROSE PETAL ANIMATION
+// ========================================
+function startPetals() {
+    const petalColors = ['#f8b4c8','#f4a0b8','#e8829a','#f9c8d4','#fde8ee','#f06090','#ffadc5'];
+    const petalShapes = [
+        'M10,2 C14,2 18,6 18,10 C18,16 10,22 10,22 C10,22 2,16 2,10 C2,6 6,2 10,2Z',
+        'M10,1 C13,1 17,4 16,8 C15,12 10,20 10,20 C10,20 5,12 4,8 C3,4 7,1 10,1Z',
+        'M10,3 Q16,2 17,8 Q18,14 10,20 Q2,14 3,8 Q4,2 10,3Z'
+    ];
+
+    setInterval(() => {
+        const petal = document.createElement('div');
+        petal.className = 'rose-petal';
+        const size     = 10 + Math.random() * 16;
+        const color    = petalColors[Math.floor(Math.random() * petalColors.length)];
+        const shape    = petalShapes[Math.floor(Math.random() * petalShapes.length)];
+        const startX   = Math.random() * 110 - 5;
+        const duration = 6 + Math.random() * 8;
+        const delay    = Math.random() * 2;
+        const sway     = 60 + Math.random() * 80;
+        const rotStart = Math.random() * 360;
+        const rotEnd   = rotStart + (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 360);
+
+        petal.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 20 22">
+            <path d="${shape}" fill="${color}" opacity="0.85"/>
+        </svg>`;
+
+        petal.style.cssText = `
+            position:fixed; left:${startX}vw; top:-30px; z-index:3;
+            pointer-events:none;
+            animation:petalFall ${duration}s ${delay}s linear forwards;
+            --sway:${sway}px;
+            --rotate-start:${rotStart}deg;
+            --rotate-end:${rotEnd}deg;`;
+
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), (duration + delay + 1) * 1000);
+    }, 350);
+}
+
+// ========================================
+// DOM CONTENT LOADED
+// ========================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    // COUNTDOWN
     const weddingDate = new Date('April 05, 2026 11:30:00').getTime();
 
     const updateCountdown = () => {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
-
+        const distance = weddingDate - new Date().getTime();
         if (distance < 0) {
-            document.querySelector('.countdown-container').innerHTML = "<h3 style='color: white; font-size: 2rem; font-family: var(--font-heading);'>We are married! 🎉</h3>";
+            const c = document.querySelector('.countdown-container');
+            if (c) c.innerHTML = "<h3 style='color:white;font-size:2rem;font-family:var(--font-heading);'>We are married! 🎉</h3>";
             return;
         }
+        const d = Math.floor(distance / 86400000);
+        const h = Math.floor((distance % 86400000) / 3600000);
+        const m = Math.floor((distance % 3600000) / 60000);
+        const s = Math.floor((distance % 60000) / 1000);
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = String(days).padStart(2, '0');
-        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        const set = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) { const v = String(val).padStart(2,'0'); if (el.innerText !== v) { el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); } el.innerText = v; }
+        };
+        set('days', d); set('hours', h); set('minutes', m); set('seconds', s);
     };
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ===== SCROLL ANIMATIONS =====
+    // SCROLL ANIMATIONS
     function initScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const element = entry.target;
-                    const animationType = element.dataset.animation || 'animate-fade-in-up';
-                    element.classList.add(animationType);
-                    observer.unobserve(element);
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add(e.target.dataset.animation || 'animate-fade-in-up');
+                    obs.unobserve(e.target);
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-animate').forEach(el => obs.observe(el));
     }
 
     function addScrollAnimationClasses() {
-        document.querySelectorAll('.time-box').forEach(el => {
-            if (!el.classList.contains('scroll-animate')) {
-                el.classList.add('scroll-animate');
-                el.dataset.animation = 'animate-fade-in-up';
-            }
+        const pairs = [
+            ['.time-box','animate-fade-in-up'],['.timeline-item','animate-fade-in-up'],
+            ['.section-title','animate-fade-in-down'],['.section-subtitle','animate-fade-in-up'],
+            ['.action-btn','animate-fade-in-up'],['.thank-you-title','animate-fade-in-down'],
+            ['.thank-you-text','animate-fade-in-up'],['.rsvp-card','animate-scale-in'],
+        ];
+        pairs.forEach(([sel, anim]) => {
+            document.querySelectorAll(sel).forEach(el => {
+                if (!el.classList.contains('scroll-animate')) { el.classList.add('scroll-animate'); el.dataset.animation = anim; }
+            });
         });
+        const lc = document.querySelector('.location-card');
+        if (lc && !lc.classList.contains('scroll-animate')) { lc.classList.add('scroll-animate'); lc.dataset.animation = 'animate-scale-in'; }
+        setTimeout(initScrollAnimations, 100);
+    }
+    setTimeout(addScrollAnimationClasses, 1500);
 
-        document.querySelectorAll('.timeline-item').forEach(el => {
-            if (!el.classList.contains('scroll-animate')) {
-                el.classList.add('scroll-animate');
-                el.dataset.animation = 'animate-fade-in-up';
-            }
+    // FLOATING HEARTS
+    const hearts   = ['❤️','💕','💖','💗','💝'];
+    const sparkles = ['✨','⭐','🌟','💫'];
+    setInterval(() => {
+        const h = document.createElement('div');
+        h.className = 'floating-heart';
+        h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        h.style.cssText = `left:${Math.random()*100}%;bottom:-50px;font-size:${2+Math.random()*1.5}rem;animation-duration:${12+Math.random()*8}s;`;
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 21000);
+    }, 2500);
+    setInterval(() => {
+        const s = document.createElement('div');
+        s.className = 'floating-sparkle';
+        s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+        s.style.cssText = `left:${Math.random()*100}%;bottom:-50px;font-size:${1.2+Math.random()}rem;animation-duration:${15+Math.random()*10}s;`;
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 26000);
+    }, 3500);
+
+    // BACKGROUND FLOWERS
+    ['🌸','🌹','🌺','🌷','🌼','🌸','🌹','🌺'].forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'floral-accent';
+        el.textContent = d;
+        el.style.cssText = `font-size:${4+Math.random()*2}rem;left:${Math.random()*100}%;top:${Math.random()*100}%;`;
+        document.body.appendChild(el);
+    });
+
+    // INIT FEATURES
+    loadWishes();
+    updateMusicBtn(false);
+    startPetals();
+
+    // RSVP FORM SUBMIT
+    const rsvpForm = document.getElementById('rsvp-form');
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name   = document.getElementById('rsvp-name').value.trim();
+            const guests = document.getElementById('rsvp-guests').value;
+            const attend = document.querySelector('input[name="attend"]:checked');
+            const note   = document.getElementById('rsvp-note').value.trim();
+            if (!name || !attend) { showToast('Please fill in your name and attendance. 💌'); return; }
+
+            const rsvps = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
+            rsvps.push({ name, guests, attend: attend.value, note, date: new Date().toLocaleDateString() });
+            localStorage.setItem('wedding_rsvps', JSON.stringify(rsvps));
+            showRsvpSuccess(name, attend.value);
+            rsvpForm.reset();
         });
-
-        const locationCard = document.querySelector('.location-card');
-        if (locationCard && !locationCard.classList.contains('scroll-animate')) {
-            locationCard.classList.add('scroll-animate');
-            locationCard.dataset.animation = 'animate-scale-in';
-        }
-
-        document.querySelectorAll('.section-title').forEach(el => {
-            if (!el.classList.contains('scroll-animate')) {
-                el.classList.add('scroll-animate');
-                el.dataset.animation = 'animate-fade-in-down';
-            }
-        });
-
-        document.querySelectorAll('.section-subtitle').forEach(el => {
-            if (!el.classList.contains('scroll-animate')) {
-                el.classList.add('scroll-animate');
-                el.dataset.animation = 'animate-fade-in-up';
-            }
-        });
-
-        document.querySelectorAll('.action-btn').forEach(el => {
-            if (!el.classList.contains('scroll-animate')) {
-                el.classList.add('scroll-animate');
-                el.dataset.animation = 'animate-fade-in-up';
-            }
-        });
-
-        const thankYouTitle = document.querySelector('.thank-you-title');
-        if (thankYouTitle && !thankYouTitle.classList.contains('scroll-animate')) {
-            thankYouTitle.classList.add('scroll-animate');
-            thankYouTitle.dataset.animation = 'animate-fade-in-down';
-        }
-
-        const thankYouText = document.querySelector('.thank-you-text');
-        if (thankYouText && !thankYouText.classList.contains('scroll-animate')) {
-            thankYouText.classList.add('scroll-animate');
-            thankYouText.dataset.animation = 'animate-fade-in-up';
-        }
-
-        setTimeout(() => {
-            initScrollAnimations();
-        }, 100);
     }
 
-    // ===== FLOATING HEARTS & DECORATIONS =====
-    function createFloatingHearts() {
-        const hearts = ['❤️', '💕', '💖', '💗', '💝'];
-        const sparkles = ['✨', '⭐', '🌟', '💫'];
-        
-        const heartInterval = setInterval(() => {
-            const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.textContent = randomHeart;
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.bottom = '-50px';
-            heart.style.fontSize = (2 + Math.random() * 1.5) + 'rem';
-            heart.style.animationDuration = (12 + Math.random() * 8) + 's';
-            heart.style.animationDelay = '0s';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 21000);
-        }, 2500);
+}); // END DOMContentLoaded
 
-        const sparkleInterval = setInterval(() => {
-            const randomSparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
-            const sparkle = document.createElement('div');
-            sparkle.className = 'floating-sparkle';
-            sparkle.textContent = randomSparkle;
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.bottom = '-50px';
-            sparkle.style.fontSize = (1.2 + Math.random() * 1) + 'rem';
-            sparkle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            document.body.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 26000);
-        }, 3500);
+// ========================================
+// WISHES WALL — persists with localStorage
+// ========================================
+function loadWishes() {
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+    const list   = document.getElementById('congrats-list');
+    if (!list) return;
+    if (wishes.length === 0) {
+        list.innerHTML = '<div class="no-congrats-message"><p>No wishes yet. Be the first to wish Dyna & Sanosh! 🎉</p></div>';
+        return;
     }
+    list.innerHTML = '';
+    wishes.forEach((w, i) => list.appendChild(createWishItem(w, i)));
+}
 
-    function addBackgroundDecorations() {
-        const decorations = ['🌸', '🌹', '🌺', '🌷', '🌼'];
-        const totalDecorations = 8;
-        for (let i = 0; i < totalDecorations; i++) {
-            const decoration = document.createElement('div');
-            decoration.className = 'floral-accent';
-            decoration.textContent = decorations[Math.floor(Math.random() * decorations.length)];
-            decoration.style.fontSize = (4 + Math.random() * 2) + 'rem';
-            decoration.style.left = Math.random() * 100 + '%';
-            decoration.style.top = Math.random() * 100 + '%';
-            document.body.appendChild(decoration);
-        }
-    }
+function createWishItem(w, index) {
+    const item = document.createElement('div');
+    item.className = 'congrats-item';
+    const initials = w.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+    item.innerHTML = `
+        <div class="congrats-avatar">${initials}</div>
+        <div class="congrats-text">
+            <p class="congrats-name">${escapeHtml(w.name)} <span class="wish-date">${w.date || ''}</span></p>
+            <p class="congrats-message">${escapeHtml(w.message)}</p>
+        </div>
+        <button class="delete-congrats-btn" onclick="deleteWish(${index})" title="Delete">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+        </button>`;
+    return item;
+}
 
-    setTimeout(() => { addScrollAnimationClasses(); }, 1500);
-    createFloatingHearts();
-    addBackgroundDecorations();
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
-}); // END OF DOMContentLoaded
-
-// ===== CONGRATULATIONS FUNCTIONS =====
 function addCongrats() {
-    const name = prompt('Enter your name:');
-    if (name) {
-        const message = prompt('Enter your congratulations message:');
-        if (message) {
-            const congratsList = document.getElementById('congrats-list');
-            
-            const noMessage = congratsList.querySelector('.no-congrats-message');
-            if (noMessage) { noMessage.remove(); }
-            
-            const newItem = document.createElement('div');
-            newItem.className = 'congrats-item';
-            
-            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-            
-            newItem.innerHTML = `
-                <div class="congrats-avatar">${initials}</div>
-                <div class="congrats-text">
-                    <p class="congrats-name">${name}</p>
-                    <p class="congrats-message">${message}</p>
-                </div>
-                <button class="delete-congrats-btn" onclick="deleteCongrats(this)" title="Delete this congratulation">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                    </svg>
-                </button>
-            `;
-            
-            congratsList.appendChild(newItem);
-            alert('Thank you for your congratulations! 🎉');
-        }
-    }
+    const name = prompt('Your name:');
+    if (!name || !name.trim()) return;
+    const message = prompt('Your wish for Dyna & Sanosh:');
+    if (!message || !message.trim()) return;
+
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+    wishes.push({ name: name.trim(), message: message.trim(), date: new Date().toLocaleDateString() });
+    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+    loadWishes();
+    showToast('Your wish has been saved forever! 💕');
 }
 
-function deleteCongrats(button) {
-    const congrat = button.parentElement;
-    const name = congrat.querySelector('.congrats-name').textContent;
-    
-    if (confirm(`Delete congratulation from ${name}?`)) {
-        congrat.style.animation = 'fadeOut 0.3s ease-out forwards';
-        setTimeout(() => {
-            congrat.remove();
-            const congratsList = document.getElementById('congrats-list');
-            if (congratsList.children.length === 0) {
-                const noMessage = document.createElement('div');
-                noMessage.className = 'no-congrats-message';
-                noMessage.innerHTML = '<p>No congratulations yet. Be the first to congratulate! 🎉</p>';
-                congratsList.appendChild(noMessage);
-            }
-        }, 300);
-    }
+function deleteWish(index) {
+    if (!confirm('Delete this wish?')) return;
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+    wishes.splice(index, 1);
+    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+    loadWishes();
 }
 
-// ===== ADD TO CALENDAR FUNCTION =====
+// ========================================
+// TOAST NOTIFICATION
+// ========================================
+function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3500);
+}
+
+// ========================================
+// RSVP SUCCESS MESSAGE
+// ========================================
+function showRsvpSuccess(name, attend) {
+    const msg = attend === 'yes'
+        ? `🎉 Thank you ${name}! We can't wait to celebrate with you!`
+        : `💌 Thank you ${name} for letting us know. You'll be missed!`;
+    const el = document.getElementById('rsvp-success');
+    if (el) { el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 5000); }
+    showToast(msg);
+}
+
+// ========================================
+// ADD TO CALENDAR
+// ========================================
 function addToCalendar() {
-    const eventTitle = 'Dyna & Sanosh Wedding';
-    const eventDate = '20260405';
-    const eventStartTime = '113000';
-    const eventEndTime = '200000';
-    const eventLocation = 'Seven Seas Hotel Dubai Airport, Dubai';
-    const eventDescription = 'You are invited to celebrate the wedding of Dyna and Sanosh';
-
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${eventDate}T${eventStartTime}/${eventDate}T${eventEndTime}&location=${encodeURIComponent(eventLocation)}&details=${encodeURIComponent(eventDescription)}`;
-
-    window.open(googleCalendarUrl, '_blank');
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Dyna & Sanosh Wedding')}&dates=20260405T113000/20260405T200000&location=${encodeURIComponent('Seven Seas Hotel Dubai Airport, Dubai')}&details=${encodeURIComponent('You are invited to celebrate the wedding of Dyna and Sanosh')}`;
+    window.open(url, '_blank');
 }
