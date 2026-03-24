@@ -160,28 +160,30 @@ ${attend.value === 'yes' ? '✅ Attending' : '❌ Not Attending'}
 👥 Guests: ${guests}
 📝 Note: ${note || 'None'}`;
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: message
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.ok) {
-                    showRsvpSuccess(name, attend.value);
-                    rsvpForm.reset();
-                } else {
-                    showToast("Telegram error: " + data.description);
-                }
-            })
-            .catch(() => {
-                showToast("Network error");
-            });
+            fetch("https://YOUR-VERCEL-URL.vercel.app/api/send", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        name,
+        guests,
+        attend: attend.value,
+        note
+    })
+})
+.then(res => res.json())
+.then(data => {
+    if (data.success) {
+        showRsvpSuccess(name, attend.value);
+        rsvpForm.reset();
+    } else {
+        showToast("Error sending RSVP");
+    }
+})
+.catch(() => {
+    showToast("Network error");
+});
         });
     }
 
