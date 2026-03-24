@@ -1,6 +1,9 @@
 export default async function handler(req, res) {
     try {
-        const { name, guests, attend, note } = req.body;
+        // ✅ FIX: parse body safely
+        const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+
+        const { name, guests, attend, note } = body;
 
         const BOT_TOKEN = "8550677960:AAGGmrJRGpOP4FRTOyoCyH_K0VEvneHnrl8";
         const CHAT_ID = "1059586105";
@@ -32,6 +35,7 @@ ${attend === 'yes' ? '✅ Attending' : '❌ Not Attending'}
         }
 
     } catch (error) {
+        console.log(error); // 🔥 helps debugging
         return res.status(500).json({ error: "Server error" });
     }
 }
