@@ -2,8 +2,8 @@ export default async function handler(req, res) {
     try {
         const { name, guests, attend, note } = req.body;
 
-        const BOT_TOKEN = "YOUR_BOT_TOKEN";
-        const CHAT_ID = "YOUR_CHAT_ID";
+        const BOT_TOKEN = "8550677960:AAGGmrJRGpOP4FRTOyoCyH_K0VEvneHnrl8";
+        const CHAT_ID = "1059586105";
 
         const message = `💍 Wedding RSVP
 
