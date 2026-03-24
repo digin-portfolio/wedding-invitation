@@ -67,12 +67,15 @@ function toggleMusic() {
 // ========================================
 function startPetals() {
     const petalColors = ['#f8b4c8','#f4a0b8','#e8829a','#f9c8d4','#fde8ee','#f06090','#ffadc5'];
+    const petalShapes = [
+        'M10,2 C14,2 18,6 18,10 C18,16 10,22 10,22 C10,22 2,16 2,10 C2,6 6,2 10,2Z'
+    ];
 
     setInterval(() => {
         const petal = document.createElement('div');
         petal.className = 'rose-petal';
 
-        petal.innerHTML = `<div style="color:${petalColors[Math.floor(Math.random()*petalColors.length)]};font-size:20px;">🌸</div>`;
+        petal.innerHTML = `<svg width="20" height="20"><circle cx="10" cy="10" r="8" fill="${petalColors[Math.floor(Math.random()*petalColors.length)]}"/></svg>`;
 
         petal.style.cssText = `
             position:fixed; left:${Math.random()*100}vw; top:-30px;
@@ -88,12 +91,33 @@ function startPetals() {
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
 
+    // COUNTDOWN
+    const weddingDate = new Date('April 05, 2026 11:30:00').getTime();
+
+    const updateCountdown = () => {
+        const distance = weddingDate - new Date().getTime();
+        if (distance < 0) return;
+
+        const d = Math.floor(distance / 86400000);
+        const h = Math.floor((distance % 86400000) / 3600000);
+        const m = Math.floor((distance % 3600000) / 60000);
+        const s = Math.floor((distance % 60000) / 1000);
+
+        document.getElementById('days').innerText = d;
+        document.getElementById('hours').innerText = h;
+        document.getElementById('minutes').innerText = m;
+        document.getElementById('seconds').innerText = s;
+    };
+
+    setInterval(updateCountdown, 1000);
+
     // INIT
+    loadWishes();
     updateMusicBtn(false);
     startPetals();
 
     // ========================================
-    // RSVP FORM (TELEGRAM VERSION)
+    // RSVP FORM (TELEGRAM FIX)
     // ========================================
     const rsvpForm = document.getElementById('rsvp-form');
 
@@ -111,9 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // 🔴 PUT YOUR VALUES HERE
-            const BOT_TOKEN = "8550677960:AAGGmrJRGpOP4FRTOyoCyH_K0VEvneHnrl8";
-            const CHAT_ID   = "1059586105";
+            const BOT_TOKEN = "YOUR_BOT_TOKEN";
+            const CHAT_ID   = "YOUR_CHAT_ID";
 
             const message = `💍 Wedding RSVP
 
@@ -132,13 +155,17 @@ ${attend.value === 'yes' ? '✅ Attending' : '❌ Not Attending'}
                     text: message
                 })
             })
-            .then(() => {
-                showRsvpSuccess(name, attend.value);
-                showToast("RSVP sent successfully!");
-                rsvpForm.reset();
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    showRsvpSuccess(name, attend.value);
+                    rsvpForm.reset();
+                } else {
+                    showToast("Telegram error: " + data.description);
+                }
             })
             .catch(() => {
-                showToast("Error sending RSVP. Try again.");
+                showToast("Network error");
             });
         });
     }
@@ -146,29 +173,40 @@ ${attend.value === 'yes' ? '✅ Attending' : '❌ Not Attending'}
 });
 
 // ========================================
+// WISHES WALL
+// ========================================
+function loadWishes() {
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+    const list = document.getElementById('congrats-list');
+
+    if (!list) return;
+
+    list.innerHTML = wishes.map(w => `<p>${w.name}: ${w.message}</p>`).join('');
+}
+
+function addCongrats() {
+    const name = prompt('Your name:');
+    const message = prompt('Your wish:');
+
+    if (!name || !message) return;
+
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+    wishes.push({ name, message });
+
+    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+    loadWishes();
+}
+
+// ========================================
 // TOAST
 // ========================================
 function showToast(msg) {
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.textContent = msg;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => { toast.remove(); }, 3000);
+    alert(msg);
 }
 
 // ========================================
 // SUCCESS MESSAGE
 // ========================================
 function showRsvpSuccess(name, attend) {
-    const msg = attend === 'yes'
-        ? `🎉 Thank you ${name}! See you there!`
-        : `💌 Thank you ${name}!`;
-
-    const el = document.getElementById('rsvp-success');
-    if (el) {
-        el.textContent = msg;
-        el.classList.add('show');
-        setTimeout(() => el.classList.remove('show'), 4000);
-    }
+    alert(`Thanks ${name}!`);
 }
