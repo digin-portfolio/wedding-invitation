@@ -224,6 +224,19 @@ function addCongrats() {
 
     if (!name || !message) return;
 
+    // ✅ SAVE LOCALLY (for display)
+    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+
+    wishes.push({
+        name,
+        message
+    });
+
+    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+
+    loadWishes(); // 👈 THIS IS IMPORTANT
+
+    // ✅ SEND TO TELEGRAM (your backend)
     fetch("https://wedding-invitation-mu-flame.vercel.app/api/wish", {
         method: "POST",
         headers: {
@@ -238,7 +251,6 @@ function addCongrats() {
         alert("Error sending wish");
     });
 }
-
 // ========================================
 // TOAST
 // ========================================
