@@ -188,26 +188,25 @@ ${attend.value === 'yes' ? '✅ Attending' : '❌ Not Attending'}
 // ========================================
 // WISHES WALL
 // ========================================
-function loadWishes() {
-    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-    const list = document.getElementById('congrats-list');
-
-    if (!list) return;
-
-    list.innerHTML = wishes.map(w => `<p>${w.name}: ${w.message}</p>`).join('');
-}
-
 function addCongrats() {
-    const name = prompt('Your name:');
-    const message = prompt('Your wish:');
+    const name = prompt("Your name:");
+    const message = prompt("Your wish:");
 
     if (!name || !message) return;
 
-    const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-    wishes.push({ name, message });
-
-    localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
-    loadWishes();
+    fetch("https://wedding-invitation-mu-flame.vercel.app/api/wish", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, message })
+    })
+    .then(() => {
+        alert("Wish sent 💖");
+    })
+    .catch(() => {
+        alert("Error sending wish");
+    });
 }
 
 // ========================================
