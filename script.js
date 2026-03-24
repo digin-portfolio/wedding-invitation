@@ -149,10 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast('Please fill in your name and attendance.');
                 return;
             }
-
-            const BOT_TOKEN = "YOUR_BOT_TOKEN";
-            const CHAT_ID   = "YOUR_CHAT_ID";
-
             const message = `💍 Wedding RSVP
 
 👤 Name: ${name}
