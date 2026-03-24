@@ -42,18 +42,22 @@ function loadWishes() {
         return;
     }
 
-    list.innerHTML = wishes.map(w => `
+    list.innerHTML = wishes.map((w, index) => `
         <div class="congrats-item">
+            
             <div class="congrats-avatar">
                 ${w.name.charAt(0).toUpperCase()}
             </div>
 
             <div class="congrats-text">
-                <p class="congrats-name">
-                    ${w.name}
-                </p>
+                <p class="congrats-name">${w.name}</p>
                 <p class="congrats-message">${w.message}</p>
             </div>
+
+            <button class="delete-congrats-btn" onclick="deleteWish(${index})">
+                ❌
+            </button>
+
         </div>
     `).join("");
 }
@@ -263,4 +267,16 @@ function showToast(msg) {
 // ========================================
 function showRsvpSuccess(name, attend) {
     alert(`Thanks ${name}!`);
+}
+
+function deleteWish(index) {
+    if (!confirm("Delete this wish?")) return;
+
+    const wishes = JSON.parse(localStorage.getItem("wedding_wishes") || "[]");
+
+    wishes.splice(index, 1);
+
+    localStorage.setItem("wedding_wishes", JSON.stringify(wishes));
+
+    loadWishes();
 }
