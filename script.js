@@ -3,7 +3,7 @@
 // ========================================
 function openEnvelope() {
     const envelopeOverlay = document.getElementById('envelope-overlay');
-    const envelope = document.querySelector('.envelope');
+    const envelope = document.getElementById('envelope-main');
     const mainContent = document.getElementById('main-content');
     const heroContent = document.querySelector('.hero-content');
 
