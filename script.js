@@ -29,7 +29,6 @@ function openEnvelope() {
         return;
     }
 
-    // Simple test - just add the class
     console.log('5. Adding open-anim class to envelope');
     envelope.classList.add('open-anim');
     console.log('6. Class added. Current classes:', envelope.className);
@@ -98,15 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
     const heroContent = document.querySelector('.hero-content');
 
-    // Countdown Logic
-    const weddingDate = new Date('March 22, 2026 17:00:00').getTime();
+    // ===== COUNTDOWN LOGIC =====
+    // Wedding: April 05, 2026 at 11:30 AM
+    const weddingDate = new Date('April 05, 2026 11:30:00').getTime();
 
     const updateCountdown = () => {
         const now = new Date().getTime();
         const distance = weddingDate - now;
 
         if (distance < 0) {
-            document.querySelector('.countdown-container').innerHTML = "<h3 style='color: white; font-size: 2rem; font-family: var(--font-heading);'>We are married!</h3>";
+            document.querySelector('.countdown-container').innerHTML = "<h3 style='color: white; font-size: 2rem; font-family: var(--font-heading);'>We are married! 🎉</h3>";
             return;
         }
 
@@ -135,26 +135,19 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const element = entry.target;
-                    
-                    // Add animation classes based on data attribute
                     const animationType = element.dataset.animation || 'animate-fade-in-up';
                     element.classList.add(animationType);
-                    
-                    // Stop observing after animation is triggered
                     observer.unobserve(element);
                 }
             });
         }, observerOptions);
 
-        // Observe all elements with scroll-animate class
         document.querySelectorAll('.scroll-animate').forEach(el => {
             observer.observe(el);
         });
     }
 
-    // Add scroll-animate class to relevant elements dynamically
     function addScrollAnimationClasses() {
-        // Countdown section
         document.querySelectorAll('.time-box').forEach(el => {
             if (!el.classList.contains('scroll-animate')) {
                 el.classList.add('scroll-animate');
@@ -162,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Timeline items
         document.querySelectorAll('.timeline-item').forEach(el => {
             if (!el.classList.contains('scroll-animate')) {
                 el.classList.add('scroll-animate');
@@ -170,14 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Location card
         const locationCard = document.querySelector('.location-card');
         if (locationCard && !locationCard.classList.contains('scroll-animate')) {
             locationCard.classList.add('scroll-animate');
             locationCard.dataset.animation = 'animate-scale-in';
         }
 
-        // Section titles
         document.querySelectorAll('.section-title').forEach(el => {
             if (!el.classList.contains('scroll-animate')) {
                 el.classList.add('scroll-animate');
@@ -185,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Section subtitles
         document.querySelectorAll('.section-subtitle').forEach(el => {
             if (!el.classList.contains('scroll-animate')) {
                 el.classList.add('scroll-animate');
@@ -193,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Action buttons
         document.querySelectorAll('.action-btn').forEach(el => {
             if (!el.classList.contains('scroll-animate')) {
                 el.classList.add('scroll-animate');
@@ -201,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Thank you section
         const thankYouTitle = document.querySelector('.thank-you-title');
         if (thankYouTitle && !thankYouTitle.classList.contains('scroll-animate')) {
             thankYouTitle.classList.add('scroll-animate');
@@ -214,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
             thankYouText.dataset.animation = 'animate-fade-in-up';
         }
 
-        // Initialize animations
         setTimeout(() => {
             initScrollAnimations();
         }, 100);
@@ -225,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const hearts = ['❤️', '💕', '💖', '💗', '💝'];
         const sparkles = ['✨', '⭐', '🌟', '💫'];
         
-        // Create floating hearts randomly - much less frequent
         const heartInterval = setInterval(() => {
             const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
             const heart = document.createElement('div');
@@ -237,13 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
             heart.style.animationDuration = (12 + Math.random() * 8) + 's';
             heart.style.animationDelay = '0s';
             document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 21000);
+            setTimeout(() => { heart.remove(); }, 21000);
         }, 2500);
 
-        // Create floating sparkles - much less frequent
         const sparkleInterval = setInterval(() => {
             const randomSparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
             const sparkle = document.createElement('div');
@@ -254,19 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
             sparkle.style.fontSize = (1.2 + Math.random() * 1) + 'rem';
             sparkle.style.animationDuration = (15 + Math.random() * 10) + 's';
             document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 26000);
+            setTimeout(() => { sparkle.remove(); }, 26000);
         }, 3500);
     }
 
-    // Add decorative background elements
     function addBackgroundDecorations() {
-        // Add subtle floral decorations
         const decorations = ['🌸', '🌹', '🌺', '🌷', '🌼'];
         const totalDecorations = 8;
-        
         for (let i = 0; i < totalDecorations; i++) {
             const decoration = document.createElement('div');
             decoration.className = 'floral-accent';
@@ -278,14 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Add scroll animations after a short delay
-    setTimeout(() => {
-        addScrollAnimationClasses();
-    }, 1500);
-
-    // Create decorations
+    setTimeout(() => { addScrollAnimationClasses(); }, 1500);
     createFloatingHearts();
     addBackgroundDecorations();
+
 }); // END OF DOMContentLoaded
 
 // ===== CONGRATULATIONS FUNCTIONS =====
@@ -296,11 +267,8 @@ function addCongrats() {
         if (message) {
             const congratsList = document.getElementById('congrats-list');
             
-            // Remove "no congrats" message if it exists
             const noMessage = congratsList.querySelector('.no-congrats-message');
-            if (noMessage) {
-                noMessage.remove();
-            }
+            if (noMessage) { noMessage.remove(); }
             
             const newItem = document.createElement('div');
             newItem.className = 'congrats-item';
@@ -337,8 +305,6 @@ function deleteCongrats(button) {
         congrat.style.animation = 'fadeOut 0.3s ease-out forwards';
         setTimeout(() => {
             congrat.remove();
-            
-            // Show "no congrats" message if list is empty
             const congratsList = document.getElementById('congrats-list');
             if (congratsList.children.length === 0) {
                 const noMessage = document.createElement('div');
@@ -352,18 +318,14 @@ function deleteCongrats(button) {
 
 // ===== ADD TO CALENDAR FUNCTION =====
 function addToCalendar() {
-    // Wedding details
-    const eventTitle = 'Dyna Prasad & Sanosh Khan J Wedding';
-    const eventDate = '2026-03-22';
-    const eventTime = '17:00';
-    const eventEndTime = '01:00';
-    const eventLocation = 'Lavender Hotel Al Nahda, Dubai';
-    const eventDescription = 'You are invited to celebrate the wedding of Dyna Prasad and Sanosh Khan J';
+    const eventTitle = 'Dyna & Sanosh Wedding';
+    const eventDate = '20260405';
+    const eventStartTime = '113000';
+    const eventEndTime = '200000';
+    const eventLocation = 'Seven Seas Hotel Dubai Airport, Dubai';
+    const eventDescription = 'You are invited to celebrate the wedding of Dyna and Sanosh';
 
-    // Google Calendar URL
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${eventDate.replace(/-/g, '')}T${eventTime.replace(/:/g, '')}00/${eventDate.replace(/-/g, '')}T${eventEndTime.replace(/:/g, '')}00&location=${encodeURIComponent(eventLocation)}&details=${encodeURIComponent(eventDescription)}`;
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${eventDate}T${eventStartTime}/${eventDate}T${eventEndTime}&location=${encodeURIComponent(eventLocation)}&details=${encodeURIComponent(eventDescription)}`;
 
-    // Open Google Calendar
     window.open(googleCalendarUrl, '_blank');
 }
-
